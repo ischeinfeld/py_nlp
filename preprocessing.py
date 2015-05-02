@@ -1,8 +1,20 @@
-develop = "/Users/ischeinfeld/Documents/Code/WSJ/develop.txt"
+def import_wsj(corpus):
 
-sentences = []
+	TRAIN = "/Users/ischeinfeld/Documents/Code/WSJ/train.txt"
+	DEVELOP = "/Users/ischeinfeld/Documents/Code/WSJ/develop.txt"
+	TEST = "/Users/ischeinfeld/Documents/Code/WSJ/test.txt"
 
-def get_sents(file):
+	if corpus == "train":
+		file = TRAIN
+	elif corpus == "develop":
+		file = DEVELOP
+	elif corpus == "test":
+		file = TEST
+	else:
+		file = corpus # If a name is not given, the input is interpreted as a path
+
+	sentences = []
+
 	with open(file, "r") as infile:
 		for line in infile:
 	
@@ -18,7 +30,3 @@ def get_sents(file):
 
 			sentences.append((words, tags))
 	return sentences
-
-
-sentences = get_sents(develop)
-print(sentences[0])
