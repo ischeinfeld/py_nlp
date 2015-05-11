@@ -1,3 +1,5 @@
+import copy
+
 def import_wsj(corpus):
 
 	TRAIN = "/Users/ischeinfeld/Documents/Code/WSJ/train.txt"
@@ -30,3 +32,46 @@ def import_wsj(corpus):
 
 			sentences.append((words, tags))
 	return sentences
+
+
+def replace_rarities(input_sentences):
+
+	sentences = copy.deepcopy(input_sentences)
+
+	words = {}
+
+	for sentence_w_tags in sentences:
+		for word in sentence_w_tags[0]:
+			if word in words:
+				words[word] = words[word] + 1
+			else:
+				words[word] = 1
+
+	sentence_num = 0
+	for sentence_w_tags in sentences:
+
+		word_num = 0
+		for word in sentence_w_tags[0]:
+			if words[word] < 6:
+				sentences[sentence_num][0][word_num] = "<?>"
+
+			word_num += 1
+		sentence_num += 1
+
+	return sentences
+
+
+def word_counts(input_sentences):
+
+	sentences = copy.deepcopy(input_sentences)
+
+	words = {}
+
+	for sentence_w_tags in sentences:
+		for word in sentence_w_tags[0]:
+			if word in words:
+				words[word] += 1
+			else:
+				words[word] = 1
+
+	return words

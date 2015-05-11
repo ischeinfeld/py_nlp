@@ -1,5 +1,8 @@
-from preprocessing import import_wsj
+from preprocessing import import_wsj, replace_rarities, word_counts
 
-sentences = import_wsj("test")
+sentences = import_wsj("train")
+print(sentences[1])
 
-print(sentences[0])
+
+new_sentences = replace_rarities(sentences)
+print(new_sentences[1])
