@@ -14,7 +14,7 @@ uv_counts = uv_counts(new_sentences)
 
 num_tags = 0
 for key in sx_counts:
-	num_tags += 1
+    num_tags += 1
 
 print()
 print("There are " + str(num_tags) + " tags.")
