@@ -43,7 +43,7 @@ def replace_rarities(input_sentences):
 	for sentence_w_tags in sentences:
 		for word in sentence_w_tags[0]:
 			if word in words:
-				words[word] = words[word] + 1
+				words[word] += 1
 			else:
 				words[word] = 1
 
@@ -60,18 +60,3 @@ def replace_rarities(input_sentences):
 
 	return sentences
 
-
-def word_counts(input_sentences):
-
-	sentences = copy.deepcopy(input_sentences)
-
-	words = {}
-
-	for sentence_w_tags in sentences:
-		for word in sentence_w_tags[0]:
-			if word in words:
-				words[word] += 1
-			else:
-				words[word] = 1
-
-	return words
