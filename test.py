@@ -1,3 +1,5 @@
+"""Tests examples of the parameters q and e"""
+
 from preprocessing import import_wsj, replace_rarities
 from parameters import sx_counts, uvs_counts, uv_counts, s_counts, q, e
 
