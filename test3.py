@@ -7,4 +7,14 @@ sentences = import_wsj("train")
 
 params = Parameters(sentences)
 
-print(params.q("NN", "DT", "NN"))
+print("q(NN|DT,NN): ", params.q("NN", "DT", "NN"))
+
+print("e(the|DT): ", params.e("the", "DT"))
+
+print("If the time between now ...")
+params.q("NN", "DT", "NN")
+params.q("NN", "DT", "NN")
+params.q("NN", "DT", "NN")
+params.q("NN", "DT", "NN")
+params.q("NN", "DT", "NN")
+print("... and now is not long, than the class is preserving counts.")

@@ -1,9 +1,9 @@
 """Decodes a sentence using the Viterbi Algorithm
 
-Input: a sentence (str), parameters q(s|u,v) and e(x|s)
+Input: a sentence (str)
 Initialization: set pi(0, <START>, <START>) = 1
 
 """
 
-from preprocessing import import_wsj, replace_rarities
-from parameters import sx_counts, uvs_counts, uv_counts, s_counts, q, e
+from preprocessing import import_wsj
+from parameters_class import Parameters
