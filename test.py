@@ -13,7 +13,7 @@ s_counts = s_counts(new_sentences)
 uv_counts = uv_counts(new_sentences)
 
 num_tags = 0
-for key in sx_counts:
+for key in s_counts:
     num_tags += 1
 
 print()
