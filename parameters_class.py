@@ -119,6 +119,7 @@ class Parameters:
 					q[u][v][s] = 0
 
 				q[u][v][s] += 1
+		
 		return q
 
 
