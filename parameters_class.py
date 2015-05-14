@@ -5,18 +5,24 @@ from preprocessing import replace_rarities
 class Parameters:
 	
 	def __init__(self, sentences):
-		self.new_sentences = replace_rarities(sentences)
+		self.new_sentences = replace_rarities(sentences) # Replaces rare words
 
-		self.var_sx_counts = self.sx_counts(self.new_sentences)
-		self.var_uvs_counts = self.uvs_counts(self.new_sentences)
-		self.var_s_counts = self.s_counts(self.new_sentences)
-		self.var_uv_counts = self.uv_counts(self.new_sentences)
+		self._sx_counts = self.sx_counts(self.new_sentences)
+		self._uvs_counts = self.uvs_counts(self.new_sentences)
+		self._s_counts = self.s_counts(self.new_sentences)
+		self._uv_counts = self.uv_counts(self.new_sentences)
+		
+		self.tags = []
+		for key in self._s_counts:
+			self.tags.append(key)
+		self.tags.append("<START>") # <START> and <STOP> are not in s_counts
+		self.tags.append("<STOP>")
 	
 	def q(self, s, u, v):
 		""" q(s|u,v) """
 		
 		try:
-			return self.var_uvs_counts[u][v][s] / self.var_uv_counts[u][v]
+			return self._uvs_counts[u][v][s] / self._uv_counts[u][v]
 		except KeyError:
 			return 0
 
@@ -25,7 +31,7 @@ class Parameters:
 		""" e(x|s) """
 
 		try:
-			return self.var_sx_counts[s][x] / self.var_s_counts[s]
+			return self._sx_counts[s][x] / self._s_counts[s]
 		except KeyError:
 			return 0
 
