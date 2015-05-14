@@ -13,9 +13,9 @@ class Parameters:
 		self._uv_counts = self.uv_counts(self.new_sentences)
 		
 		self.tags = []
+		self.tags.append("<START>") # <START> and <STOP> are not in s_counts
 		for key in self._s_counts:
 			self.tags.append(key)
-		self.tags.append("<START>") # <START> and <STOP> are not in s_counts
 		self.tags.append("<STOP>")
 	
 	def q(self, s, u, v):
@@ -24,16 +24,16 @@ class Parameters:
 		try:
 			return self._uvs_counts[u][v][s] / self._uv_counts[u][v]
 		except KeyError:
-			return 0
+			return 0.0
 
 
 	def e(self, x, s):
 		""" e(x|s) """
-
+		
 		try:
 			return self._sx_counts[s][x] / self._s_counts[s]
 		except KeyError:
-			return 0
+			return 0.0 # If s is never x
 
 # Functions		
 

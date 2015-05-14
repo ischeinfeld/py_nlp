@@ -2,6 +2,8 @@ from decoder_class import Decoder
 
 sentence = "The man could not understand him."
 
-decoder = Decoder("test")
+decoder = Decoder("train")
 
-print(decoder.decode(sentence))
+decode = decoder.decode(sentence)
+
+print(decode)
