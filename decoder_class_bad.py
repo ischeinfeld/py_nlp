@@ -1,4 +1,6 @@
-"""Decodes a sentence using the Viterbi Algorithm
+"""NOTE: this works, but is wrong.
+
+Decodes a sentence using the Viterbi Algorithm
 
 Input: a sentence (str)
 Initialization: set pi(0, <START>, <START>) = 1

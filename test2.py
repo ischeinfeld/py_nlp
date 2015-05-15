@@ -17,15 +17,22 @@ uv_counts = uv_counts(new_sentences)
 
 ## Test q
 
-print()
-print("TESTING q(s|u,v)")
-print()
-
 tags = []
 for key in s_counts:
 	tags.append(key)
 tags.append("<START>") # <START> and <STOP> are not in s_counts
 tags.append("<STOP>")
+
+print()
+print("TESTING q(s|NN,NN)")
+print()
+
+for s in tags:
+	print(s, q(uvs_counts, uv_counts, s, 'NN', 'NN'))
+
+print()
+print("TESTING q(s|u,v)")
+print()
 
 #print(tags)
 
