@@ -22,7 +22,7 @@ parameters.py
 ##### The following tests are useful:
 3, 5
 
-##### The following tests are useful:
+##### The following tests are no longer useful:
 1, 2, 4
 
 ## decoder_class.py
