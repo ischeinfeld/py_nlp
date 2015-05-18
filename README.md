@@ -3,11 +3,11 @@ An exploration of nlp in python
 
 NOTE: this software is under active development and is not complete.
 
-### The following are not yet functional, and are meant to be used directly:
+#### The following are not yet functional, and are meant to be used directly:
 
 decoder_class.py
 
-### The following are functional, but not meant to be used directly:
+##### The following are functional, but not meant to be used directly:
 
 preprocessing.py
 
