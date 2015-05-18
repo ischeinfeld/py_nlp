@@ -1,4 +1,4 @@
-from decoder_class_bad import Decoder
+from decoder_class import Decoder
 
 sentence = "The man could not understandeder him."
 
