@@ -3,7 +3,7 @@ An exploration of nlp in python
 
 NOTE: this software is under active development and is not complete.
 
-#### The following are not yet functional, and are meant to be used directly:
+##### The following are not yet functional, and are meant to be used directly:
 
 decoder_class.py
 
@@ -13,18 +13,18 @@ preprocessing.py
 
 parameters_class.py
 
-### The following are deprecated:
+##### The following are deprecated:
 
 decoder_class_bad.py
 
 parameters.py
 
-### The following tests are useful:
+##### The following tests are useful:
 3, 5
 
-### The following tests are useful:
+##### The following tests are useful:
 1, 2, 4
 
-### decoder_class.py
+## decoder_class.py
 
     #TODO
