@@ -42,7 +42,6 @@ class Decoder:
 		tags = ['<START>', '<START>']
 		probs = []
 
-
 		return (tokens, tags, probs)
 
 
