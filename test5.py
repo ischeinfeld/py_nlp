@@ -6,4 +6,4 @@ decoder = Decoder("train")
 
 decode = decoder.decode(sentence)
 
-print(decode)
+#print(decode)
