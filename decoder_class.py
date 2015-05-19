@@ -38,12 +38,32 @@ class Decoder:
 		Output: a tuple with lists of tokens, tags, and probabilities
 		"""
 
-		tokens = self.prep_sentence(sentence)
-		tags = ['<START>', '<START>']
-		probs = []
+		token_seq = self.prep_sentence(sentence)
 
-		return (tokens, tags, probs)
+		### Calculate pi values
 
+		pi = []
+		tags = self.params.tags
+
+		pi[0] = {'<START>': {'<START>': 0}} # pi[k][u][v]
+
+		for k in range(1, len(token_seq)):
+			for w in pi[k-1]:
+				for u in pi[k-1][w]:
+					for v in tags:
+						pi[k][u][v] = pi[k-1][w][u] * self.params.q(v, w, u) * self.params.e(token_seq[i],v)
+
+		'''
+		tag_seq = ['<START>', '<START>']
+		prob_seq = []
+
+		return (token_seq, tag_seq, prob_seq)
+		'''
+
+		for k in pi:
+			for u in pi[k]:
+				for v in pi[k][u]:
+					print("pi(", k, ", ", u, ", ", v, ")")
 
 	def get_prob(self, u, v, s, x):
 
