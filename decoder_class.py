@@ -39,7 +39,7 @@ class Decoder:
 		"""
 
 		token_seq = self.prep_sentence(sentence)
-		print(token_seq)
+		tag_seq = ['<START>', '<START>']
 
 		### Calculate pi values
 
@@ -51,31 +51,18 @@ class Decoder:
 		pi[0]['<START>']['<START>'] = 1 # pi[k][u][v]
 
 		for k in range(1, len(token_seq)):
-			print("k: ", k)
-			pi.append({})
-			for w in pi[k-1]:
-				for u in pi[k-1][w]:
-					pi[k][u] = {}
-					for v in tags:
+			for u in tags:
+				for v in tags:
+					max = 0.0
+					for w in pi[k-1].keys(): # for w that produces hightest prob u v, keep w (where?)
+						if  
+
+
+
 						pi[k][u][v] = pi[k-1][w][u] * self.params.q(v, w, u) * self.params.e(token_seq[k - 1],v) # k-1 at end because token_seq is indexed from 0
 
-		'''
-		tag_seq = ['<START>', '<START>']
-		prob_seq = []
-
 		return (token_seq, tag_seq, prob_seq)
-		'''
 
-		print(pi[1])
-		print(pi[2])
-		
-		'''
-		for k in pi:
-			print(k)
-			for u in k:
-				for v in k[u]:
-					print("pi(", k, ", ", u, ", ", v, ")")
-		'''
 
 	def get_prob(self, u, v, s, x):
 
