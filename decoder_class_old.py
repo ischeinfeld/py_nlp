@@ -68,7 +68,7 @@ class Decoder:
 
 		print(pi[1])
 		print(pi[2])
-		
+
 		'''
 		for k in pi:
 			print(k)

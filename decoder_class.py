@@ -55,7 +55,7 @@ class Decoder:
 				for v in tags:
 					max = 0.0
 					for w in pi[k-1].keys(): # for w that produces hightest prob u v, keep w (where?)
-						if  
+						if
 
 
 
