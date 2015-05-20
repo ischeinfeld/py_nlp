@@ -41,27 +41,49 @@ class Decoder:
 		token_seq = self.prep_sentence(sentence)
 		tag_seq = ['<START>', '<START>']
 
-		### Calculate pi values
+		### Calculate pi values and store back pointers
 
 		pi = []
+		bp = []
 		tags = self.params.tags
 
 		pi.append({})
 		pi[0]['<START>'] = {}
 		pi[0]['<START>']['<START>'] = 1 # pi[k][u][v]
 
+		bp.append({})
+		bp[0]['<START>'] = {}
+		bp[0]['<START>']['<START>'] = None # pi[k][u][v]
+
+
 		for k in range(1, len(token_seq)):
+			pi.append({}) # pi[k] = {}
+			bp.append({}) # bp[k] = {}
 			for u in tags:
+				pi[k][u] = {}
+				bp[k][u] = {}
 				for v in tags:
 					max = 0.0
+					pi[k][u][v] = max # Pi value
+					bp[k][u][v] = None # back pointer value
 					for w in pi[k-1].keys(): # for w that produces hightest prob u v, keep w (where?)
-						if
+						try:
+							prob = pi[k-1][w][u] * self.params.q(v, w, u) * self.params.e(token_seq[k - 1],v) # k-1 at end because token_seq is indexed from 0
+						except KeyError:
+							prob = 0.0
+						if prob >= max:
+							max = prob
+							pi[k][u][v] = prob
+							bp[k][u][v] = w
 
+		for k in bp:
+			print()
+			print(k)
+			print()
 
-
-						pi[k][u][v] = pi[k-1][w][u] * self.params.q(v, w, u) * self.params.e(token_seq[k - 1],v) # k-1 at end because token_seq is indexed from 0
-
+		'''
 		return (token_seq, tag_seq, prob_seq)
+		'''
 
 
 	def get_prob(self, u, v, s, x):

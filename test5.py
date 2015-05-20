@@ -1,6 +1,6 @@
 from decoder_class import Decoder
 
-sentence = "The man could not understandeder him."
+sentence = "The man could understanded."
 
 decoder = Decoder("train")
 
