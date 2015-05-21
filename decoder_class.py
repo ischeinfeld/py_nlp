@@ -35,11 +35,10 @@ class Decoder:
 
 		Input: a sentence (str)
 
-		Output: a tuple with lists of tokens, tags, and probabilities
+		Output: a tuple with lists of tokens and tags
 		"""
 
 		token_seq = self.prep_sentence(sentence)
-		tag_seq = ['<START>', '<START>']
 
 		### Calculate pi values and store back pointers
 
@@ -56,7 +55,7 @@ class Decoder:
 		bp[0]['<START>']['<START>'] = None # pi[k][u][v]
 
 
-		for k in range(1, len(token_seq)):
+		for k in range(1, len(token_seq) + 1):
 			pi.append({}) # pi[k] = {}
 			bp.append({}) # bp[k] = {}
 			for u in tags:
@@ -76,14 +75,28 @@ class Decoder:
 							pi[k][u][v] = prob
 							bp[k][u][v] = w
 
-		for k in bp:
-			print()
-			print(k)
-			print()
+		### Find last two tags, using <STOP> prob
+		max = 0.0
+		for u in tags:
+			for v in tags:
+				prob = pi[len(token_seq)][u][v] * self.params.q('<STOP>', u, v) # -1 for size to index
+				if prob >= max:
+					max = prob
+					yn, yn_1 = v, u #  | yn is y sub n |  yn_1 is y sub (n-1)
 
-		'''
-		return (token_seq, tag_seq, prob_seq)
-		'''
+		### Get tag sequence using backtracking
+
+		tag_seq = [] # Replace with ['<START>', '<START>'] if desired
+		for word in token_seq:
+			tag_seq.append(None)
+
+		tag_seq[-1] = yn
+		tag_seq[-2] = yn_1
+
+		for i in range(len(tag_seq) - 3, -1, -1):
+			tag_seq[i] = bp[i+3][tag_seq[i+1]][tag_seq[i+2]]
+
+		return (token_seq, tag_seq)
 
 
 	def get_prob(self, u, v, s, x):
@@ -98,5 +111,4 @@ class Decoder:
 	def prep_sentence(self, sentence):
 		"""Tokenizes a sentence string"""
 		sentence_list = TreebankWordTokenizer().tokenize(sentence)
-		sentence_list.append('<STOP>')
 		return sentence_list
