@@ -15,6 +15,10 @@ class Decoder:
 	def __init__(self, corpus_name):
 		"""Initialize parameters using a corpus
 
+		Parameters q (transition) and e (emission) are calculated by eponymous
+		functions from the class Parameters using counts over the corpus.
+		See parameters_class.py for details.
+
 		The corpus must be from the Penn WSJ treebank
 
 		corpus_name can be one of three names:
@@ -25,6 +29,9 @@ class Decoder:
 		or corpus_name can be a complete path to the corpus text:
 			ex. /dir/dir/dir/file(.txt)
 		"""
+
+		### Create instance of Parameters with the given corpus
+		# Note that this completes all the counts for q and e
 
 		self.corpus = import_wsj(corpus_name)
 		self.params = Parameters(self.corpus)
@@ -38,7 +45,7 @@ class Decoder:
 		Output: a tuple with lists of tokens and tags
 		"""
 
-		token_seq = self.prep_sentence(sentence)
+		token_seq = self.prep_sentence(sentence) # Tokenize sentence
 
 		### Calculate pi values and store back pointers
 
@@ -65,21 +72,24 @@ class Decoder:
 					max = 0.0
 					pi[k][u][v] = max # Pi value
 					bp[k][u][v] = None # back pointer value
-					for w in pi[k-1].keys(): # for w that produces hightest prob u v, keep w (where?)
+					for w in pi[k-1].keys():
 						try:
-							prob = pi[k-1][w][u] * self.params.q(v, w, u) * self.params.e(token_seq[k - 1],v) # k-1 at end because token_seq is indexed from 0
+							prob = (pi[k-1][w][u] * self.params.q(v, w, u)
+									* self.params.e(token_seq[k - 1],v)
+									# token_seq[k-1] is the token at v
 						except KeyError:
 							prob = 0.0
 						if prob >= max:
 							max = prob
-							pi[k][u][v] = prob
-							bp[k][u][v] = w
+							pi[k][u][v] = prob # Store new highest probability
+							bp[k][u][v] = w # Store backpointer to w
 
-		### Find last two tags, using <STOP> prob
+		### Find last two tags, using <STOP> transition probability
+
 		max = 0.0
 		for u in tags:
 			for v in tags:
-				prob = pi[len(token_seq)][u][v] * self.params.q('<STOP>', u, v) # -1 for size to index
+				prob = pi[len(token_seq)][u][v] * self.params.q('<STOP>', u, v)
 				if prob >= max:
 					max = prob
 					yn, yn_1 = v, u #  | yn is y sub n |  yn_1 is y sub (n-1)
@@ -97,16 +107,6 @@ class Decoder:
 			tag_seq[i] = bp[i+3][tag_seq[i+1]][tag_seq[i+2]]
 
 		return (token_seq, tag_seq)
-
-
-	def get_prob(self, u, v, s, x):
-
-		q = self.params.q(s, u, v)
-
-		e = self.params.e(x, s)
-
-		return q * e
-
 
 	def prep_sentence(self, sentence):
 		"""Tokenizes a sentence string"""
