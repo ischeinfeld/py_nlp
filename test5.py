@@ -1,10 +1,9 @@
 from decoder_class import Decoder
 
-sentence = "The man jumped across the track, breaking his leg."
+sentence = "Today is most often used as a noun."
 
-decoder = Decoder("train")
+decoder = Decoder("train", 5)
 
 decode = decoder.decode(sentence)
 
-print(decode[0])
-print(decode[1])
+print(list(zip(decode[0],decode[1])))

@@ -19,7 +19,7 @@ def import_wsj(corpus):
 
 	with open(file, "r") as infile:
 		for line in infile:
-	
+
 			sentence = line.split()
 			words = []
 			tags = []
@@ -33,8 +33,7 @@ def import_wsj(corpus):
 			sentences.append((words, tags))
 	return sentences
 
-
-def replace_rarities(input_sentences):
+def rep_rare_corpus(input_sentences, rarity):
 
 	sentences = copy.deepcopy(input_sentences)
 
@@ -52,7 +51,7 @@ def replace_rarities(input_sentences):
 
 		word_num = 0
 		for word in sentence_w_tags[0]:
-			if words[word] < 6:
+			if words[word] < rarity:
 				sentences[sentence_num][0][word_num] = "<?>"
 
 			word_num += 1

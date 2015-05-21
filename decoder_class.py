@@ -12,7 +12,7 @@ from parameters_class import Parameters
 
 class Decoder:
 
-	def __init__(self, corpus_name):
+	def __init__(self, corpus_name, rarity=5):
 		"""Initialize parameters using a corpus
 
 		Parameters q (transition) and e (emission) are calculated by eponymous
@@ -34,7 +34,7 @@ class Decoder:
 		# Note that this completes all the counts for q and e
 
 		self.corpus = import_wsj(corpus_name)
-		self.params = Parameters(self.corpus)
+		self.params = Parameters(self.corpus, rarity)
 
 
 	def decode(self, sentence):
@@ -46,6 +46,10 @@ class Decoder:
 		"""
 
 		token_seq = self.prep_sentence(sentence) # Tokenize sentence
+		for i in range(len(token_seq)):          # Replace rare words
+			token_seq[i] = self.params.rep_rare_input(token_seq[i])
+
+		print("token_seq after rep: ", token_seq)
 
 		### Calculate pi values and store back pointers
 
@@ -81,7 +85,7 @@ class Decoder:
 							prob = 0.0
 						if prob >= max:
 							max = prob
-							pi[k][u][v] = prob # Store new highest probability
+							pi[k][u][v] = prob * 1000 # Store new highest probability
 							bp[k][u][v] = w # Store backpointer to w
 
 		### Find last two tags, using <STOP> transition probability
@@ -91,7 +95,7 @@ class Decoder:
 			for v in tags:
 				prob = pi[len(token_seq)][u][v] * self.params.q('<STOP>', u, v)
 				if prob >= max:
-					max = prob
+					max = prob * 100
 					yn, yn_1 = v, u #  | yn is y sub n |  yn_1 is y sub (n-1)
 
 		### Get tag sequence using backtracking
@@ -106,6 +110,7 @@ class Decoder:
 		for i in range(len(tag_seq) - 3, -1, -1):
 			tag_seq[i] = bp[i+3][tag_seq[i+1]][tag_seq[i+2]]
 
+		print(max)
 		return (token_seq, tag_seq)
 
 	def prep_sentence(self, sentence):
