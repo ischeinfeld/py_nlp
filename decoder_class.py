@@ -75,7 +75,7 @@ class Decoder:
 					for w in pi[k-1].keys():
 						try:
 							prob = (pi[k-1][w][u] * self.params.q(v, w, u)
-									* self.params.e(token_seq[k - 1],v)
+									* self.params.e(token_seq[k - 1],v))
 									# token_seq[k-1] is the token at v
 						except KeyError:
 							prob = 0.0
