@@ -1,6 +1,6 @@
 from decoder_class_log import Decoder
 
-sentence = "Today is most often used as a noun."
+sentence = "Dr. Scheinfeld saw thrity two patients today."
 
 decoder = Decoder("train", 5)
 
