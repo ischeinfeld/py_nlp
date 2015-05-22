@@ -8,7 +8,7 @@ in my development of this project and my foray into NLP.
 
 ##### Disclaimer/Excuses
 NOTE: this software is under active development. It is not optimized for
-practical use, rather for theoretical clarity. It iss also not commented
+practical use, rather for theoretical clarity. It is also not commented
 or documented (especially in its lower level functions and classes)
 so as to make it friendly to any user besides myself.
 
@@ -38,4 +38,4 @@ parameters.py
 
 ## decoder_class_log.py
 
-    #TODO
+    #TODO explanation
