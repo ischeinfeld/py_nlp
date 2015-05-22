@@ -46,9 +46,16 @@ class Decoder:
 		Output: a tuple with lists of tokens and tags
 		"""
 
-		token_seq = self.prep_sentence(sentence) # Tokenize sentence
+		if isinstance(sentence, str):
+			token_seq = self.prep_sentence(sentence) # Tokenize sentence
+			print("decoder_class_log, token_seq from string", token_seq)
+		else:
+			token_seq = sentence[0] # Already tokenized
+			print("decoder_class_log, token_seq from list", token_seq)
+
 		for i in range(len(token_seq)):          # Replace rare words
 			token_seq[i] = self.params.rep_rare_input(token_seq[i])
+
 
 		print("Token sequence after replacing rarities:", token_seq)
 
@@ -87,7 +94,7 @@ class Decoder:
 						except ValueError:
 							log_prob = float('-inf')
 
-						if max == float('-inf') or log_prob >= max: # Explicit
+						if log_prob >= max: # Explicit
 							max = log_prob
 							pi[k][u][v] = log_prob # New max log probability
 							bp[k][u][v] = w # Backpointer to w
@@ -105,7 +112,7 @@ class Decoder:
 				except ValueError:
 					log_prob = float('-inf')
 
-				if max == float('-inf') or log_prob >= max: # Explicit
+				if log_prob >= max: # Explicit
 					max = log_prob
 					yn, yn_1 = v, u #  | yn is y sub n |  yn_1 is y sub (n-1)
 

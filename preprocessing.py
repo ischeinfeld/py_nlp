@@ -30,7 +30,7 @@ def import_wsj(corpus):
 				else:
 					tags.append(sentence[i])
 
-			sentences.append((words, tags))
+			sentences.append([words, tags])
 	return sentences
 
 def rep_rare_corpus(input_sentences, rarity):

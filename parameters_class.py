@@ -58,10 +58,12 @@ class Parameters:
 
 		try:
 			if self.token_freqs[token] <= self.rarity:
+				print("rep_rare_input:", token, self.token_freqs[token])
 				return '<?>'
 			else:
 				return token
 		except KeyError:
+			print("rep_rare_input:", token, 0)
 			return '<?>'
 
 
