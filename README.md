@@ -6,8 +6,9 @@ Thank you to Prof. Michael Collins, PhD. and graduate student Karl
 Stratos (both of Columbia University) for their extensive guidance
 in my development of this project and my foray into NLP.
 
-##### Disclaimer/Excuses
-NOTE: this software is under active development. It is not optimized for
+##### Disclaimer/Excuses :)
+NOTE: this software is under active development (Edit: it was during Summer 2015, at the moment it is dormant).
+It is not optimized for
 practical use, rather for theoretical clarity. It is also not commented
 or documented (especially in its lower level functions and classes)
 so as to make it friendly to any user besides myself.
