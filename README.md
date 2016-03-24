@@ -7,11 +7,11 @@ Stratos (both of Columbia University) for their extensive guidance
 in my development of this project and my foray into NLP.
 
 ##### Disclaimer/Excuses :)
-NOTE: this software is under active development (Edit: it was during Summer 2015, at the moment it is dormant).
-It is not optimized for
-practical use, rather for theoretical clarity. It is also not commented
-or documented (especially in its lower level functions and classes)
-so as to make it friendly to any user besides myself.
+NOTE: this software was written as an experiment during the spring/summer of 2015.
+It is not optimized for practical use, rather it was written as a direct translation
+of the underlying concepts. Looking back, I would have done many things differently.
+It is also not commented or documented (especially in its lower level functions and
+classes) so as to make it friendly to any user besides myself.
 
 ##### The following are meant to be used directly:
 
@@ -36,7 +36,3 @@ parameters.py
 
 ##### The following tests are no longer useful:
 1, 2, 4, 5
-
-## decoder_class_log.py
-
-    #TODO explanation
