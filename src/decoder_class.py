@@ -35,7 +35,7 @@ class Decoder:
 		# Note that this completes all the counts for q and e
 
 		self.corpus = import_wsj(corpus_name)
-		self.params = Parameters(self.corpus, rarity)
+		self.params = Parameters(self.corpus)
 
 
 	def decode(self, sentence):
