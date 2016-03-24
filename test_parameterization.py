@@ -1,12 +1,13 @@
 """Tests the functionality of parameters_class"""
 
-from preprocessing import import_wsj
-from parameters_class import Parameters
+from src.preprocessing import import_wsj
+from src.parameters_class import Parameters
 
 sentences = import_wsj('train')
 
 params = Parameters(sentences)
 
+## examples of parameteres
 print("q(<STOP>|NN,.): ", params.q('<STOP>', 'NN', '.'))
 
 print("e(the|DT): ", params.e("the", "DT"))

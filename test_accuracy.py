@@ -1,12 +1,12 @@
-from preprocessing import import_wsj, rep_rare_corpus
-from decoder_class_log import Decoder
+from src.preprocessing import import_wsj, rep_rare_corpus
+from src.decoder_class_log import Decoder
 
 sentences = import_wsj("test")
 
 correct = 0
 total = 0
 
-decoder = Decoder("train", 5)
+decoder = Decoder("train")
 
 for sentence_and_tags in sentences:
 	local_correct = 0

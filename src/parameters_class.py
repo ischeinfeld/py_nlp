@@ -1,5 +1,5 @@
 import copy
-from preprocessing import rep_rare_corpus
+from src.preprocessing import rep_rare_corpus
 #from parameters import sx_counts
 
 class Parameters:

@@ -8,8 +8,8 @@ Initialization: set pi(0, <START>, <START>) = 1
 from math import log, exp
 from nltk.tokenize import TreebankWordTokenizer
 
-from preprocessing import import_wsj
-from parameters_class import Parameters
+from src.preprocessing import import_wsj
+from src.parameters_class import Parameters
 
 class Decoder:
 

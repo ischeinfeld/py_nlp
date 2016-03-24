@@ -1,5 +1,6 @@
 # py_nlp
-An exploration of nlp in python
+A Part of Speech tagger using Markov Chains on word uni-, bi-, and trigrams and
+trained on the WSJ corpus.
 
 ##### Thanks
 Thank you to Prof. Michael Collins, PhD. and graduate student Karl
@@ -12,27 +13,3 @@ It is not optimized for practical use, rather it was written as a direct transla
 of the underlying concepts. Looking back, I would have done many things differently.
 It is also not commented or documented (especially in its lower level functions and
 classes) so as to make it friendly to any user besides myself.
-
-##### The following are meant to be used directly:
-
-decoder_class_log.py
-
-##### The following are functional, but not meant to be used directly:
-
-preprocessing.py
-
-parameters_class.py
-
-##### The following are deprecated:
-
-decoder_class.py
-
-decoder_class_bad.py
-
-parameters.py
-
-##### The following tests are useful:
-3, 6, 7
-
-##### The following tests are no longer useful:
-1, 2, 4, 5
