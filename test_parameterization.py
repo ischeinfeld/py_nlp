@@ -1,7 +1,7 @@
 """Tests the functionality of parameters_class"""
 
 from src.preprocessing import import_wsj
-from src.parameters_class import Parameters
+from src.parameters import Parameters
 
 sentences = import_wsj('train')
 

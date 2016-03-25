@@ -9,7 +9,7 @@ from math import log, exp
 from nltk.tokenize import TreebankWordTokenizer
 
 from src.preprocessing import import_wsj
-from src.parameters_class import Parameters
+from src.parameters import Parameters
 
 class Decoder:
 
@@ -48,10 +48,10 @@ class Decoder:
 
 		if isinstance(sentence, str):
 			token_seq = self.prep_sentence(sentence) # Tokenize sentence
-			print("decoder_class_log, token_seq from string", token_seq)
+			#print("decoder_class_log, token_seq from string", token_seq)
 		else:
 			token_seq = sentence[0] # Already tokenized
-			print("decoder_class_log, token_seq from list", token_seq)
+			#print("decoder_class_log, token_seq from list", token_seq)
 
 		for i in range(len(token_seq)):          # Replace rare words
 			token_seq[i] = self.params.rep_rare_input(token_seq[i])
@@ -73,7 +73,6 @@ class Decoder:
 		bp[0]['<START>'] = {}
 		bp[0]['<START>']['<START>'] = None # pi[k][u][v]
 
-
 		for k in range(1, len(token_seq) + 1):
 			pi.append({}) # pi[k] = {}
 			bp.append({}) # bp[k] = {}
@@ -86,6 +85,7 @@ class Decoder:
 					bp[k][u][v] = None # back pointer value
 					for w in pi[k-1].keys():
 						try:
+							print("marker")
 							log_prob = (pi[k-1][w][u] + log(self.params.q(v, w, u))
 									+ log(self.params.e(token_seq[k - 1],v)))
 									# token_seq[k-1] is the token at v

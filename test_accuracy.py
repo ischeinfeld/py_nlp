@@ -1,5 +1,5 @@
 from src.preprocessing import import_wsj, rep_rare_corpus
-from src.decoder_class_log import Decoder
+from src.decoder import Decoder
 
 sentences = import_wsj("test")
 

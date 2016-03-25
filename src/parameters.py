@@ -1,4 +1,5 @@
 import copy
+import time
 from src.preprocessing import rep_rare_corpus
 #from parameters import sx_counts
 
@@ -6,9 +7,9 @@ class Parameters:
 
 	def __init__(self, input_sentences, rarity=5):
 		sentences = copy.deepcopy(input_sentences)
-		# If a token's count <= rarity, replace with <?> #TODO fix rarity
-		#self.rarity = rarity
-		#self.new_sentences = rep_rare_corpus(sentences, rarity) # Replaces rare words
+		# If a token's count <= rarity, replace with <?>
+		self.rarity = rarity
+		self.new_sentences = rep_rare_corpus(sentences, rarity) # Replaces rare words
 		self.new_sentences = sentences
 
 		self._sx_counts = self.sx_counts(self.new_sentences)
@@ -46,7 +47,7 @@ class Parameters:
 	def e(self, x, s):
 		""" e(x|s) """
 
-		#x = self.rep_rare_input(x) #TODO fix rarity
+		# x = self.rep_rare_input(x) # isn't everything already replaced?
 
 		try:
 			return self._sx_counts[s][x] / self._s_counts[s]
@@ -60,11 +61,13 @@ class Parameters:
 		try:
 			if self.token_freqs[token] <= self.rarity:
 				print("rep_rare_input:", token, self.token_freqs[token])
+				time.sleep(1)
 				return '<?>'
 			else:
 				return token
 		except KeyError:
 			print("rep_rare_input:", token, 0)
+			time.sleep(1)
 			return '<?>'
 
 
