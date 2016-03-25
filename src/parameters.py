@@ -47,7 +47,7 @@ class Parameters:
 	def e(self, x, s):
 		""" e(x|s) """
 
-		# x = self.rep_rare_input(x) # isn't everything already replaced?
+		# x = self.rep_rare_input(x) # isn't everything already replaced? #TODO
 
 		try:
 			return self._sx_counts[s][x] / self._s_counts[s]
