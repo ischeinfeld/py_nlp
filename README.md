@@ -1,6 +1,6 @@
 # py_nlp
 A Part of Speech tagger using Markov Chains on word uni-, bi-, and trigrams and
-trained on the WSJ corpus.
+trained on the WSJ corpus. Primary code in src/.
 
 ##### Thanks
 Thank you to Prof. Michael Collins, PhD. and graduate student Karl
